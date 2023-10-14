@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- 34 - Creamos el form del SIGNUP -->
+
+    <form action="">
+
+        <h2>Registrarse</h2>
+        <label for="">Email</label>
+    
+        <!-- El NAME tiene que ser el mismo del que figura en el MODELO - IMPORTANTE: siempre todo en minúscula JAMÁS en mayúscula -->
+        <input type="text" name="email" required>
+    
+        <!-- Creamos un div para dar el mensaje de email error-->
+        <div class="email error"></div>
+    
+        <label for="">Password</label>
+    
+         <!-- El NAME tiene que ser el mismo del que figura en el MODELO - IMPORTANTE: siempre todo en minúscula JAMÁS en mayúscula -->
+        <input type="password" name="password" required>
+    
+        <!-- Creamos un div para dar el mensaje de password error-->
+        <div class="password error"></div>
+    
+        <button>Registrarse</button>
+    
+    </form>
+
+    <!-- 35 - Creamos un script, mientras trabajamos en el formulario, para parar el proceso cuando hacemos click en registrarse. Esto siempre se utiliza mientras estamos en DESARROLLO para ver como actúan los datos. Una vez que está todo ok, quitamos el preventDefault(). Digamos que es una especie de console.log(). Si el preventDefault() no estuviera, esaríamos perdiendo los datos cada vez que queremos probar el formulario -->
+    
+    <script>
+        const form = document.querySelector('form')
+            //form.addEventListener('submit', (e) =>{
+            
+                // 42 - Agrego un async antes de la (e) en donde comienza la función => 'submit', async (e) y creo un try catch, ya que nos conectaremos mediante un fetch a /signup
+                form.addEventListener('submit', async (e) =>{
+                e.preventDefault()
+           
+            // 36 - Obtengo la información que envía el usuario desde el formulario. O sea, los valores            
+            const email = form.email.value
+            const password = form.password.value
+            console.log(email, password)  
+            
+            
+            try {
+               // 43 - Enviamos la información con el método POST y un fetch al /signup
+              const res = await fetch('/signup', {
+                method: 'POST',
+                // Transformamos el email y el password de objeto a json
+                body: JSON.stringify({email, password}),
+                headers: { 'Content-Type': 'application/json'}
+              })  
+            } catch (error) {
+                console.log(error)
+            }
+
+            }) 
+
+    </script>
+</body>
+</html>
