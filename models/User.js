@@ -33,5 +33,5 @@ userSchema.post('save', function( doc, next ) {
 })
 // el next() es para seguir a la siguiente función. En el post sigue al renderizado
 
-const User = mongoose.model('usrEcommerceUTN', userSchema)
+const User = mongoose.model('prueba', userSchema)
 module.exports = User
